@@ -117,17 +117,52 @@ class Solution:
             
         prev.next = curr.next
         return dummy.next  
+ 
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        slow, fast = head, head
+        
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        prev = slow
+        curr = slow.next
+        prev.next = None 
+        prev = None
+        
+        while curr:
+            next = curr.next 
+            curr.next = prev 
+            prev = curr
+            curr = next 
+            
+        left = head
+        right = prev
+        
+        while right:
+            tempLeft = left.next
+            tempRight = right.next 
+            left.next = right 
+            right.next = tempLeft  
+            left = tempLeft
+            right = tempRight                      
+            
     
 solution = Solution()
-list1 = [1,2,4]
+list1 = [1,2,3,4]
 l1 = ListNode(list1[0])
+head = l1
 for val in list1[1:]:
     l1.next = ListNode(val)
     l1 = l1.next 
-list2 = [1,3,4]
-l2 = ListNode(list2[0])
-for val in list2[1:]:
-    l2.next = ListNode(val)
-    l2 = l2.next 
-print(solution.mergeTwoLists(l1, l2))
 
+# list2 = [1,3,4]
+# l2 = ListNode(list2[0])
+# for val in list2[1:]:
+#     l2.next = ListNode(val)
+#     l2 = l2.next 
+head = solution.reorderList(l1)
+
+while head:
+    print(head.val)
+    head = head.next
