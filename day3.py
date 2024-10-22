@@ -23,9 +23,35 @@ class Solution:
                 
         return -1
     
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        """Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] 
+        such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+        Notice that the solution set must not contain duplicate triplets."""
+        
+        nums.sort()
+        result = set()
+        
+        for i in range(0, len(nums) - 2):
+            if i - 1 > 0 and nums[i] == nums[i - 1]:
+                continue
+            if nums[i] > 0:
+                break 
+            j = i + 1
+            k = len(nums) - 1
+            while j < k:
+                temp = nums[i] + nums[j] + nums[k]
+                if temp == 0:
+                    result.add((nums[i], nums[j], nums[k]))
+                    j += 1
+                    k -= 1
+                elif temp < 0:
+                    j += 1
+                else:
+                    k -= 1
+        return [list(val) for val in result]
+    
     
 solution = Solution()
-nums = [4,5,6,7,0,1,2] 
-target = 0
-print(solution.search(nums, target))
+nums = [-2,0,1,1,2]
+print(solution.threeSum(nums))
 
