@@ -47,8 +47,9 @@ class Solution:
                     l = mid + 1
         return result
         
-
+    
 
 solution = Solution()
-nums = [4,5,6,7,0,1,2]
-print(solution.findMin(nums))
+nums = [4,5,6,7,0,1,2] 
+target = 0
+print(solution.search(nums, target))
