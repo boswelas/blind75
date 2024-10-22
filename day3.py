@@ -1,5 +1,9 @@
-from typing import List
+from typing import List, Optional
 
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 class Solution:
     
@@ -50,7 +54,6 @@ class Solution:
                     k -= 1
         return [list(val) for val in result]
     
-    
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         """Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
         You may assume that each input would have exactly one solution, and you may not use the same element twice.
@@ -62,9 +65,21 @@ class Solution:
                 return (index, values[target - num])
             else:
                 values[num] = index
-            
-                
+                  
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        if not head:
+            return False
         
+        slow, fast = head, head
+        
+        while fast and fast.next:
+            slow = slow.next 
+            fast = fast.next.next
+            
+            if fast == slow:
+                return True
+
+        return False
         
     
 solution = Solution()
