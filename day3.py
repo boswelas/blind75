@@ -1,3 +1,4 @@
+from cmath import inf
 from typing import List, Optional
 
 class ListNode:
@@ -80,10 +81,34 @@ class Solution:
                 return True
 
         return False
+    
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        curr = dummy
         
+        while list1 and list2:
+            if list1.val < list2.val:
+                curr.next = list1
+                list1 = list1.next
+            else:
+                curr.next = list2
+                list2 = list2.next
+            curr = curr.next
+            
+        curr.next = list1 or list2
+        
+        return dummy.next
     
 solution = Solution()
-nums = [2,7,11,15] 
-target = 9
-print(solution.twoSum(nums, target))
+list1 = [1,2,4]
+l1 = ListNode(list1[0])
+for val in list1[1:]:
+    l1.next = ListNode(val)
+    l1 = l1.next 
+list2 = [1,3,4]
+l2 = ListNode(list2[0])
+for val in list2[1:]:
+    l2.next = ListNode(val)
+    l2 = l2.next 
+print(solution.mergeTwoLists(l1, l2))
 
