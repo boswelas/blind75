@@ -98,6 +98,25 @@ class Solution:
         curr.next = list1 or list2
         
         return dummy.next
+
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        """Given the head of a linked list, remove the nth node from the end of the list and return its head."""
+        dummy = ListNode(0)
+        dummy.next = head
+        fast = head
+        
+        for i in range(n):
+            fast = fast.next
+        
+        curr = head
+        prev = dummy        
+        while fast:
+            prev = curr
+            curr = curr.next
+            fast = fast.next
+            
+        prev.next = curr.next
+        return dummy.next  
     
 solution = Solution()
 list1 = [1,2,4]
